@@ -305,9 +305,6 @@ class Version:
     def ast_analysis(self):
         return '%s/AST_analysis/%s_%s.csv' % (Version.MISSING_BRANCH_PATH, self.name(), self.no())
 
-    def result_Delta_4T_dir(self):
-        return '/home/lizijie/research/new_work/result_Delta4T/%s_%s_buggy' % (self.project_name, self.no())
-
     def copy_result_file(self, formula):
         os.system('cp %s/%s.statements.ranking.csv %s/' % (self.gzoltar_txt_dir(), formula, self.result_Delta_4T_dir()))
 
@@ -321,7 +318,8 @@ class Version:
         return self.project_no-1 if self.project_no!=0 else max_no[self.project_name]
 
     def defects4j_dir(self):
-        return '/home/lizijie/research/new_work/defects4j/framework/projects/%s' % self.project_name
+        # xxx is for anonymous.
+        return 'xxx/defects4j/framework/projects/%s' % self.project_name
 
     def gzoltar_txt_dir(self):
         return '%s/gzoltar/sfl/txt' % self.base_dir()
@@ -353,7 +351,6 @@ class Version:
         return failed_tests
 
     def extract_AST(self):
-        # jar_path = '/home/lizijie/research/new_work/javaparser-maven-sample/target/javaparser-maven-sample-1.0-SNAPSHOT.jar'
         jar_path = Version.JAR_PATH
         order = 'allJarFilesInPath'
         src_path = '%s/%s_%s_buggy/%s' % (Version.WORKSPACE, self.name(),
@@ -364,7 +361,6 @@ class Version:
         os.system('java -jar %s %s %s %s %s' % (jar_path, order, src_path, mode_order, output_path))
 
     def extract_method_call(self):
-        # jar_path = '/home/lizijie/research/new_work/MCFL/AST_analyzer/target/AST_analyzer-1.0-SNAPSHOT.jar'
         jar_path = Version.JAR_PATH
         file_order = 'allJarFilesInPath'
         cls_path = self.classes_dir()
@@ -427,7 +423,6 @@ class Version:
    
 
     def extract_variable(self):
-        #jar_path = '/home/lizijie/research/new_work/MCFL/AST_analyzer/target/AST_analyzer-1.0-SNAPSHOT.jar'
         #file_order = 'allJarFilesInPath'
         #src_path = '%s/%s' % (self.base_dir(), self.src_dict())
         #mode_order = 'variable'
@@ -448,7 +443,6 @@ class Version:
                 self.key_without_transfer(), self.key_dir())
 
     def extract_info_with_AST_analyzer(self, mode_order, middle_path, output_path):
-        # jar_path = '/home/lizijie/research/new_work/MCFL/AST_analyzer/target/AST_analyzer-1.0-SNAPSHOT.jar'
         jar_path = Version.JAR_PATH
         file_order = 'allJarFilesInPath'
         src_path = '%s/%s' % (self.base_dir(), self.src_dict())
@@ -682,7 +676,7 @@ class FixedVersion(Version):
         Version.__init__(self, project_name, project_no)
 
     def base_dir(self):
-        return '/home/lizijie/research/new_work/workspace/%s_%s_fixed' % (self.project_name, self.no())
+        return '%s/%s_%s_fixed' % (Version.WORKSPACE, self.project_name, self.no())
 
     def read_trigger_tests(self):
         return []

@@ -34,7 +34,8 @@ def transfer_project_formula(name, formula):
         transfer_project(name, i+1, formula)
 
 def read_bug_location(project):
-    input_file = open('/home/lizijie/research/new_work/log/location_result_of_%s.csv' % project)
+    # xxx  is for anonymous location
+    input_file = open('xxx/location_result_of_%s.csv' % project)
     reader = csv.DictReader(input_file)
     result = []
     for row in reader:
